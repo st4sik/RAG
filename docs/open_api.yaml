@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: Chat Service API
+  version: 1.0.0
+paths:
+  /chat:
+    get:
+      summary: Generate Answer
+      operationId: generateAnswer
+      parameters:
+        - name: query
+          in: query
+          schema:
+            type: string
+          default: "What is RAG?"
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+        '204':
+          description: No Content
+      tags:
+        - Chat
+
+  /admin/document/upload:
+    post:
+      summary: Upload Document
+      operationId: uploadFile
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+      responses:
+        '201':
+          description: Created
+        '500':
+          description: Internal Server Error
+      tags:
+        - Admin
